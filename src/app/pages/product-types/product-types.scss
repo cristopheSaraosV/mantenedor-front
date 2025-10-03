@@ -1,0 +1,258 @@
+.product-types-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 15px;
+
+  h1 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 2rem;
+  }
+
+  .actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+}
+
+.category-info {
+  margin-bottom: 30px;
+
+  .category-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .category-icon {
+      .icon {
+        font-size: 3rem;
+      }
+    }
+
+    .category-details {
+      h2 {
+        margin: 0 0 10px 0;
+        font-size: 1.5rem;
+      }
+
+      p {
+        margin: 0;
+        opacity: 0.9;
+      }
+    }
+  }
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.1rem;
+}
+
+.error {
+  color: #e74c3c;
+  
+  button {
+    margin-top: 10px;
+  }
+}
+
+.product-types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 20px;
+}
+
+.product-type-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 4px solid #9b59b6;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.product-type-info {
+  padding: 20px;
+
+  h3 {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+    font-size: 1.3rem;
+  }
+
+  .description {
+    color: #7f8c8d;
+    margin-bottom: 15px;
+    line-height: 1.4;
+  }
+
+  .specifications {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 3px solid #9b59b6;
+
+    strong {
+      color: #2c3e50;
+      font-size: 0.9rem;
+    }
+
+    p {
+      margin: 5px 0 0 0;
+      color: #495057;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+  }
+}
+
+.product-type-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .products-count {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+  }
+
+  .status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+
+    &.active {
+      background: #d5f4e6;
+      color: #27ae60;
+    }
+
+    &.inactive {
+      background: #fadbd8;
+      color: #e74c3c;
+    }
+  }
+}
+
+.product-type-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #7f8c8d;
+
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.3s ease;
+  font-weight: 500;
+
+  &.btn-primary {
+    background: #3498db;
+    color: white;
+
+    &:hover {
+      background: #2980b9;
+    }
+  }
+
+  &.btn-secondary {
+    background: #95a5a6;
+    color: white;
+
+    &:hover {
+      background: #7f8c8d;
+    }
+  }
+
+  &.btn-info {
+    background: #17a2b8;
+    color: white;
+
+    &:hover {
+      background: #138496;
+    }
+  }
+
+  &.btn-danger {
+    background: #e74c3c;
+    color: white;
+
+    &:hover {
+      background: #c0392b;
+    }
+  }
+
+  &.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+
+    .actions {
+      justify-content: center;
+    }
+  }
+
+  .category-info .category-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .product-types-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-type-actions {
+    justify-content: center;
+  }
+
+  .product-type-stats {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

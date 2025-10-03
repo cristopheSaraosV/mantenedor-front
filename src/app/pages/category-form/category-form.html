@@ -1,0 +1,83 @@
+<div class="form-container">
+  <div class="form-header">
+    <h1>{{ isEditMode ? '✏️ Editar Categoría' : '➕ Nueva Categoría' }}</h1>
+    <button (click)="onCancel()" class="btn btn-secondary">← Volver</button>
+  </div>
+
+  <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="category-form">
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="name">Nombre de la Categoría *</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          placeholder="Ej: Prueba de Transformadores"
+          [class.error]="isFieldInvalid('name')"
+        />
+        <div class="error-message" *ngIf="isFieldInvalid('name')">
+          {{ getFieldError('name') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="icon">Icono</label>
+        <input
+          type="text"
+          id="icon"
+          formControlName="icon"
+          placeholder="Ej: ⚡, 🔧, 📊"
+        />
+        <small>Emoji o símbolo para representar la categoría</small>
+      </div>
+
+      <div class="form-group">
+        <label for="sortOrder">Orden</label>
+        <input
+          type="number"
+          id="sortOrder"
+          formControlName="sortOrder"
+          min="0"
+          placeholder="0"
+        />
+        <small>Orden de visualización (menor número = aparece primero)</small>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="description">Descripción</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          rows="4"
+          placeholder="Describe qué tipo de productos incluye esta categoría..."
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="isActive" />
+          <span class="checkmark"></span>
+          Categoría Activa
+        </label>
+        <small>Las categorías inactivas no se mostrarán en el catálogo público</small>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" (click)="onCancel()" class="btn btn-secondary">
+        Cancelar
+      </button>
+      <button 
+        type="submit" 
+        class="btn btn-primary"
+        [disabled]="loading || categoryForm.invalid">
+        <span *ngIf="loading">🔄 {{ isEditMode ? 'Actualizando...' : 'Creando...' }}</span>
+        <span *ngIf="!loading">{{ isEditMode ? '💾 Actualizar Categoría' : '➕ Crear Categoría' }}</span>
+      </button>
+    </div>
+
+    <div class="error-message global-error" *ngIf="error">
+      ❌ {{ error }}
+    </div>
+  </form>
+</div>

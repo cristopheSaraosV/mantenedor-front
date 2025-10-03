@@ -1,0 +1,68 @@
+<div class="products-container">
+  <div class="header">
+    <h1>📦 Gestión de Productos</h1>
+    <div class="actions">
+      <button 
+        class="filter-btn" 
+        (click)="toggleActiveFilter()"
+        [class.active]="showActiveOnly">
+        {{ showActiveOnly ? 'Mostrar Todos' : 'Solo Activos' }}
+      </button>
+      <a routerLink="/products/new" class="btn btn-primary" *ngIf="isLoggedIn()">
+        ➕ Nuevo Producto
+      </a>
+    </div>
+  </div>
+
+  <div class="loading" *ngIf="loading">
+    <p>🔄 Cargando productos...</p>
+  </div>
+
+  <div class="error" *ngIf="error">
+    <p>❌ {{ error }}</p>
+    <button (click)="loadProducts()" class="btn btn-secondary">Reintentar</button>
+  </div>
+
+  <div class="products-grid" *ngIf="!loading && !error">
+    <div class="product-card" *ngFor="let product of products">
+      <div class="product-image" *ngIf="product.imageUrl">
+        <img [src]="product.imageUrl" alt="Imagen del producto">
+      </div>
+      <div class="product-info">
+        <h3>{{ product.model }}</h3>
+        <p class="description" *ngIf="product.description">{{ product.description }}</p>
+        <div class="product-details">
+          <span class="price" *ngIf="product.price">{{ formatPrice(product.price) }}</span>
+          <span class="stock" [class.low-stock]="product.stock < 10">
+            Stock: {{ product.stock }}
+          </span>
+          <span class="brand" *ngIf="product.brand">{{ product.brand }}</span>
+          <span class="country" *ngIf="product.country">{{ product.country }}</span>
+          <span class="product-type" *ngIf="product.productType">{{ product.productType.name }}</span>
+        </div>
+        <div class="product-status">
+          <span class="status" [class.active]="product.isActive" [class.inactive]="!product.isActive">
+            {{ product.isActive ? '✅ Activo' : '❌ Inactivo' }}
+          </span>
+        </div>
+        <div class="product-actions" *ngIf="isLoggedIn()">
+          <a [routerLink]="['/products/edit', product.id]" class="btn btn-sm btn-secondary">
+            ✏️ Editar
+          </a>
+          <button 
+            (click)="deleteProduct(product.id!)" 
+            class="btn btn-sm btn-danger">
+            🗑️ Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="!loading && !error && products.length === 0">
+    <p>📭 No hay productos disponibles</p>
+    <a routerLink="/products/new" class="btn btn-primary" *ngIf="isLoggedIn()">
+      ➕ Crear Primer Producto
+    </a>
+  </div>
+</div>

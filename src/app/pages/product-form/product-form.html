@@ -1,0 +1,184 @@
+<div class="form-container">
+  <div class="form-header">
+    <h1>{{ isEditMode ? '✏️ Editar Producto' : '➕ Nuevo Producto' }}</h1>
+    <button (click)="onCancel()" class="btn btn-secondary">← Volver</button>
+  </div>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-form">
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="model">Modelo del Producto *</label>
+        <input
+          type="text"
+          id="model"
+          formControlName="model"
+          placeholder="Ej: TRT 33 Marca DV Power Suecia"
+          [class.error]="isFieldInvalid('model')"
+        />
+        <div class="error-message" *ngIf="isFieldInvalid('model')">
+          {{ getFieldError('model') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="brand">Marca</label>
+        <input
+          type="text"
+          id="brand"
+          formControlName="brand"
+          placeholder="Ej: DV Power, SAMGOR"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="country">País</label>
+        <input
+          type="text"
+          id="country"
+          formControlName="country"
+          placeholder="Ej: Suecia, China"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="categoryId">Categoría *</label>
+        <select
+          id="categoryId"
+          #categorySelect
+          (change)="onCategoryChange(categorySelect.value)"
+          [class.error]="isFieldInvalid('categoryId')"
+        >
+          <option value="">Selecciona una categoría</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+        <div class="error-message" *ngIf="isFieldInvalid('categoryId')">
+          {{ getFieldError('categoryId') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="productTypeId">Tipo de Producto *</label>
+        <select
+          id="productTypeId"
+          formControlName="productTypeId"
+          [class.error]="isFieldInvalid('productTypeId')"
+          [disabled]="productTypes.length === 0"
+        >
+          <option value="">Selecciona un tipo de producto</option>
+          <option *ngFor="let productType of productTypes" [value]="productType.id">
+            {{ productType.name }}
+          </option>
+        </select>
+        <div class="error-message" *ngIf="isFieldInvalid('productTypeId')">
+          {{ getFieldError('productTypeId') }}
+        </div>
+        <small *ngIf="productTypes.length === 0">Primero selecciona una categoría</small>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Precio (€) *</label>
+        <input
+          type="number"
+          id="price"
+          formControlName="price"
+          step="0.01"
+          min="0"
+          placeholder="0.00"
+          [class.error]="isFieldInvalid('price')"
+        />
+        <div class="error-message" *ngIf="isFieldInvalid('price')">
+          {{ getFieldError('price') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="stock">Stock *</label>
+        <input
+          type="number"
+          id="stock"
+          formControlName="stock"
+          min="0"
+          placeholder="0"
+          [class.error]="isFieldInvalid('stock')"
+        />
+        <div class="error-message" *ngIf="isFieldInvalid('stock')">
+          {{ getFieldError('stock') }}
+        </div>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="description">Descripción</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          rows="3"
+          placeholder="Describe las características del producto..."
+        ></textarea>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="technicalSpecs">Especificaciones Técnicas</label>
+        <textarea
+          id="technicalSpecs"
+          formControlName="technicalSpecs"
+          rows="4"
+          placeholder="Ej: V Pruebas de 1,8,40 y 100 V, Mide TP y TC, medidas monofásicas..."
+        ></textarea>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="imageUrl">URL de Imagen</label>
+        <input
+          type="url"
+          id="imageUrl"
+          formControlName="imageUrl"
+          placeholder="https://ejemplo.com/imagen.jpg"
+        />
+        <div class="image-preview" *ngIf="productForm.get('imageUrl')?.value">
+          <img [src]="productForm.get('imageUrl')?.value" alt="Vista previa" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="sortOrder">Orden</label>
+        <input
+          type="number"
+          id="sortOrder"
+          formControlName="sortOrder"
+          min="0"
+          placeholder="0"
+        />
+        <small>Orden de visualización (menor número = aparece primero)</small>
+      </div>
+
+      <div class="form-group">
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="isActive" />
+          <span class="checkmark"></span>
+          Producto Activo
+        </label>
+        <small>Los productos inactivos no se mostrarán en el catálogo público</small>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" (click)="onCancel()" class="btn btn-secondary">
+        Cancelar
+      </button>
+      <button 
+        type="submit" 
+        class="btn btn-primary"
+        [disabled]="loading || productForm.invalid">
+        <span *ngIf="loading">🔄 {{ isEditMode ? 'Actualizando...' : 'Creando...' }}</span>
+        <span *ngIf="!loading">{{ isEditMode ? '💾 Actualizar Producto' : '➕ Crear Producto' }}</span>
+      </button>
+    </div>
+
+    <div class="error-message global-error" *ngIf="error">
+      ❌ {{ error }}
+    </div>
+  </form>
+</div>
+

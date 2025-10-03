@@ -8,10 +8,24 @@ bootstrapApplication(App, {
   providers: [
     provideHttpClient(withInterceptors([
       (req, next) => {
-        req = req.clone({
+        // Obtener el token del localStorage
+        const token = localStorage.getItem('access_token');
+        
+        // Clonar la request y agregar headers
+        let modifiedReq = req.clone({
           withCredentials: true
         });
-        return next(req);
+
+        // Si hay token, agregarlo al header Authorization
+        if (token) {
+          modifiedReq = modifiedReq.clone({
+            setHeaders: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+        }
+
+        return next(modifiedReq);
       }
     ])),
     provideRouter(routes)

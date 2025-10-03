@@ -1,1 +1,23 @@
-<router-outlet></router-outlet>
+<nav class="navigation">
+  <div class="nav-container">
+    <h1 class="nav-title">Sistema de Gestión</h1>
+    <div class="nav-buttons">
+      <button class="nav-btn" (click)="navigateTo('/categories')">
+        📁 Categorías
+      </button>
+      <button class="nav-btn" (click)="navigateTo('/product-types')">
+        🏷️ Tipos de Producto
+      </button>
+      <button class="nav-btn" (click)="navigateTo('/products')">
+        📦 Productos
+      </button>
+      <button class="nav-btn" (click)="navigateTo('/home')">
+        🏠 Inicio
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>

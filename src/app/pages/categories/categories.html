@@ -1,0 +1,59 @@
+<div class="categories-container">
+  <div class="header">
+    <h1>📂 Gestión de Categorías</h1>
+    <div class="actions">
+      <a routerLink="/categories/new" class="btn btn-primary" *ngIf="isLoggedIn()">
+        ➕ Nueva Categoría
+      </a>
+    </div>
+  </div>
+
+  <div class="loading" *ngIf="loading">
+    <p>🔄 Cargando categorías...</p>
+  </div>
+
+  <div class="error" *ngIf="error">
+    <p>❌ {{ error }}</p>
+    <button (click)="loadCategories()" class="btn btn-secondary">Reintentar</button>
+  </div>
+
+  <div class="categories-grid" *ngIf="!loading && !error">
+    <div class="category-card" *ngFor="let category of categories">
+      <div class="category-icon" *ngIf="category.icon">
+        <span class="icon">{{ category.icon }}</span>
+      </div>
+      <div class="category-info">
+        <h3>{{ category.name }}</h3>
+        <p class="description" *ngIf="category.description">{{ category.description }}</p>
+        <div class="category-stats">
+          <span class="product-types-count">
+            📦 {{ getProductTypesCount(category) }} tipos de productos
+          </span>
+          <span class="status" [class.active]="category.isActive" [class.inactive]="!category.isActive">
+            {{ category.isActive ? '✅ Activa' : '❌ Inactiva' }}
+          </span>
+        </div>
+        <div class="category-actions" *ngIf="isLoggedIn()">
+          <a [routerLink]="['/categories/edit', category.id]" class="btn btn-sm btn-secondary">
+            ✏️ Editar
+          </a>
+          <a [routerLink]="['/product-types', 'category', category.id]" class="btn btn-sm btn-info">
+            📦 Ver Tipos
+          </a>
+          <button 
+            (click)="deleteCategory(category.id!)" 
+            class="btn btn-sm btn-danger">
+            🗑️ Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="!loading && !error && categories.length === 0">
+    <p>📭 No hay categorías disponibles</p>
+    <a routerLink="/categories/new" class="btn btn-primary" *ngIf="isLoggedIn()">
+      ➕ Crear Primera Categoría
+    </a>
+  </div>
+</div>

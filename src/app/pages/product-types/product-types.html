@@ -1,0 +1,75 @@
+<div class="product-types-container">
+  <div class="header">
+    <h1>📦 {{ getPageTitle() }}</h1>
+    <div class="actions">
+      <a routerLink="/categories" class="btn btn-secondary" *ngIf="categoryId">
+        ← Volver a Categorías
+      </a>
+      <a [routerLink]="['/product-types/new', categoryId ? {categoryId: categoryId} : {}]" class="btn btn-primary" *ngIf="isLoggedIn()">
+        ➕ Nuevo Tipo
+      </a>
+    </div>
+  </div>
+
+  <div class="category-info" *ngIf="category">
+    <div class="category-card">
+      <div class="category-icon" *ngIf="category.icon">
+        <span class="icon">{{ category.icon }}</span>
+      </div>
+      <div class="category-details">
+        <h2>{{ category.name }}</h2>
+        <p *ngIf="category.description">{{ category.description }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="loading" *ngIf="loading">
+    <p>🔄 Cargando tipos de productos...</p>
+  </div>
+
+  <div class="error" *ngIf="error">
+    <p>❌ {{ error }}</p>
+    <button (click)="loadProductTypes()" class="btn btn-secondary">Reintentar</button>
+  </div>
+
+  <div class="product-types-grid" *ngIf="!loading && !error">
+    <div class="product-type-card" *ngFor="let productType of productTypes">
+      <div class="product-type-info">
+        <h3>{{ productType.name }}</h3>
+        <p class="description" *ngIf="productType.description">{{ productType.description }}</p>
+        <div class="specifications" *ngIf="productType.specifications">
+          <strong>Especificaciones:</strong>
+          <p>{{ productType.specifications }}</p>
+        </div>
+        <div class="product-type-stats">
+          <span class="products-count">
+            📦 {{ getProductsCount(productType) }} productos
+          </span>
+          <span class="status" [class.active]="productType.isActive" [class.inactive]="!productType.isActive">
+            {{ productType.isActive ? '✅ Activo' : '❌ Inactivo' }}
+          </span>
+        </div>
+        <div class="product-type-actions" *ngIf="isLoggedIn()">
+          <a [routerLink]="['/product-types/edit', productType.id]" class="btn btn-sm btn-secondary">
+            ✏️ Editar
+          </a>
+          <a [routerLink]="['/products', 'product-type', productType.id]" class="btn btn-sm btn-info">
+            📦 Ver Productos
+          </a>
+          <button 
+            (click)="deleteProductType(productType.id!)" 
+            class="btn btn-sm btn-danger">
+            🗑️ Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="!loading && !error && productTypes.length === 0">
+    <p>📭 No hay tipos de productos disponibles</p>
+    <a [routerLink]="['/product-types/new', categoryId ? {categoryId: categoryId} : {}]" class="btn btn-primary" *ngIf="isLoggedIn()">
+      ➕ Crear Primer Tipo
+    </a>
+  </div>
+</div>

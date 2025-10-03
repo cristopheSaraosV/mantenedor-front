@@ -1,0 +1,99 @@
+<div class="form-container">
+  <div class="form-header">
+    <h1>{{ isEditMode ? '✏️ Editar Tipo de Producto' : '➕ Nuevo Tipo de Producto' }}</h1>
+    <button (click)="onCancel()" class="btn btn-secondary">← Volver</button>
+  </div>
+
+  <form [formGroup]="productTypeForm" (ngSubmit)="onSubmit()" class="product-type-form">
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="name">Nombre del Tipo *</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          placeholder="Ej: TTR Trifásico Automático"
+          [class.error]="isFieldInvalid('name')"
+        />
+        <div class="error-message" *ngIf="isFieldInvalid('name')">
+          {{ getFieldError('name') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="categoryId">Categoría *</label>
+        <select
+          id="categoryId"
+          formControlName="categoryId"
+          [class.error]="isFieldInvalid('categoryId')"
+        >
+          <option value="">Selecciona una categoría</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+        <div class="error-message" *ngIf="isFieldInvalid('categoryId')">
+          {{ getFieldError('categoryId') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="sortOrder">Orden</label>
+        <input
+          type="number"
+          id="sortOrder"
+          formControlName="sortOrder"
+          min="0"
+          placeholder="0"
+        />
+        <small>Orden de visualización (menor número = aparece primero)</small>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="description">Descripción</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          rows="3"
+          placeholder="Describe las características generales de este tipo de producto..."
+        ></textarea>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="specifications">Especificaciones Técnicas</label>
+        <textarea
+          id="specifications"
+          formControlName="specifications"
+          rows="4"
+          placeholder="Ej: Voltaje de prueba: 1-100V, Medición de TP y TC, Pruebas monofásicas y trifásicas..."
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="isActive" />
+          <span class="checkmark"></span>
+          Tipo Activo
+        </label>
+        <small>Los tipos inactivos no se mostrarán en el catálogo público</small>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" (click)="onCancel()" class="btn btn-secondary">
+        Cancelar
+      </button>
+      <button 
+        type="submit" 
+        class="btn btn-primary"
+        [disabled]="loading || productTypeForm.invalid">
+        <span *ngIf="loading">🔄 {{ isEditMode ? 'Actualizando...' : 'Creando...' }}</span>
+        <span *ngIf="!loading">{{ isEditMode ? '💾 Actualizar Tipo' : '➕ Crear Tipo' }}</span>
+      </button>
+    </div>
+
+    <div class="error-message global-error" *ngIf="error">
+      ❌ {{ error }}
+    </div>
+  </form>
+</div>
