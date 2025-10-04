@@ -1,68 +1,123 @@
 <div class="products-container">
-  <div class="header">
-    <h1>📦 Gestión de Productos</h1>
-    <div class="actions">
+  <mat-card class="page-header">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>inventory</mat-icon>
+        Gestión de Productos
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-actions>
       <button 
-        class="filter-btn" 
+        mat-raised-button 
+        [color]="showActiveOnly ? 'primary' : 'accent'"
         (click)="toggleActiveFilter()"
-        [class.active]="showActiveOnly">
+        class="me-2">
+        <mat-icon>{{ showActiveOnly ? 'visibility' : 'visibility_off' }}</mat-icon>
         {{ showActiveOnly ? 'Mostrar Todos' : 'Solo Activos' }}
       </button>
-      <a routerLink="/products/new" class="btn btn-primary" *ngIf="isLoggedIn()">
-        ➕ Nuevo Producto
-      </a>
-    </div>
-  </div>
+      <button mat-raised-button color="primary" routerLink="/products/new" *ngIf="isLoggedIn()">
+        <mat-icon>add</mat-icon>
+        Nuevo Producto
+      </button>
+    </mat-card-actions>
+  </mat-card>
 
-  <div class="loading" *ngIf="loading">
-    <p>🔄 Cargando productos...</p>
-  </div>
-
-  <div class="error" *ngIf="error">
-    <p>❌ {{ error }}</p>
-    <button (click)="loadProducts()" class="btn btn-secondary">Reintentar</button>
-  </div>
-
-  <div class="products-grid" *ngIf="!loading && !error">
-    <div class="product-card" *ngFor="let product of products">
-      <div class="product-image" *ngIf="product.imageUrl">
-        <img [src]="product.imageUrl" alt="Imagen del producto">
+  <mat-card *ngIf="loading" class="loading-card">
+    <mat-card-content>
+      <div class="loading-content">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p>Cargando productos...</p>
       </div>
-      <div class="product-info">
-        <h3>{{ product.model }}</h3>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="error" class="error-card">
+    <mat-card-content>
+      <div class="error-content">
+        <mat-icon color="warn">error</mat-icon>
+        <p>{{ error }}</p>
+        <button mat-raised-button color="accent" (click)="loadProducts()">
+          <mat-icon>refresh</mat-icon>
+          Reintentar
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="products-grid" *ngIf="!loading && !error && products.length > 0">
+    <mat-card class="product-card" *ngFor="let product of products">
+      <mat-card-header>
+        <mat-card-title>{{ product.model }}</mat-card-title>
+        <mat-card-subtitle>
+          <div class="status-buttons">
+            <button mat-mini-fab 
+                    [color]="product.isActive ? 'primary' : 'warn'"
+                    class="status-button">
+              <mat-icon>{{ product.isActive ? 'check_circle' : 'cancel' }}</mat-icon>
+            </button>
+            <span class="status-text">{{ product.isActive ? 'Activo' : 'Inactivo' }}</span>
+            
+            <button mat-mini-fab 
+                    [color]="product.stock < 10 ? 'warn' : 'primary'"
+                    class="count-button">
+              <mat-icon>inventory_2</mat-icon>
+            </button>
+            <span class="count-text">Stock: {{ product.stock }}</span>
+          </div>
+        </mat-card-subtitle>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <div class="product-image" *ngIf="product.imageUrl">
+          <img [src]="product.imageUrl" alt="Imagen del producto" class="product-img">
+        </div>
+        
         <p class="description" *ngIf="product.description">{{ product.description }}</p>
+        
         <div class="product-details">
-          <span class="price" *ngIf="product.price">{{ formatPrice(product.price) }}</span>
-          <span class="stock" [class.low-stock]="product.stock < 10">
-            Stock: {{ product.stock }}
-          </span>
-          <span class="brand" *ngIf="product.brand">{{ product.brand }}</span>
-          <span class="country" *ngIf="product.country">{{ product.country }}</span>
-          <span class="product-type" *ngIf="product.productType">{{ product.productType.name }}</span>
+          <div class="detail-row" *ngIf="product.price">
+            <mat-icon>euro</mat-icon>
+            <span class="price">{{ formatPrice(product.price) }}</span>
+          </div>
+          <div class="detail-row" *ngIf="product.brand">
+            <mat-icon>business</mat-icon>
+            <span>{{ product.brand }}</span>
+          </div>
+          <div class="detail-row" *ngIf="product.country">
+            <mat-icon>public</mat-icon>
+            <span>{{ product.country }}</span>
+          </div>
+          <div class="detail-row" *ngIf="product.productType">
+            <mat-icon>label</mat-icon>
+            <span>{{ product.productType.name }}</span>
+          </div>
         </div>
-        <div class="product-status">
-          <span class="status" [class.active]="product.isActive" [class.inactive]="!product.isActive">
-            {{ product.isActive ? '✅ Activo' : '❌ Inactivo' }}
-          </span>
-        </div>
-        <div class="product-actions" *ngIf="isLoggedIn()">
-          <a [routerLink]="['/products/edit', product.id]" class="btn btn-sm btn-secondary">
-            ✏️ Editar
-          </a>
-          <button 
-            (click)="deleteProduct(product.id!)" 
-            class="btn btn-sm btn-danger">
-            🗑️ Eliminar
-          </button>
-        </div>
-      </div>
-    </div>
+      </mat-card-content>
+      
+      <mat-card-actions *ngIf="isLoggedIn()" class="product-actions">
+        <button mat-button color="primary" [routerLink]="['/products/edit', product.id]">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </button>
+        <button mat-button color="warn" (click)="deleteProduct(product.id!)">
+          <mat-icon>delete</mat-icon>
+          Eliminar
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 
-  <div class="empty-state" *ngIf="!loading && !error && products.length === 0">
-    <p>📭 No hay productos disponibles</p>
-    <a routerLink="/products/new" class="btn btn-primary" *ngIf="isLoggedIn()">
-      ➕ Crear Primer Producto
-    </a>
-  </div>
+  <mat-card *ngIf="!loading && !error && products.length === 0" class="empty-state">
+    <mat-card-content>
+      <div class="empty-content">
+        <mat-icon>inventory_2</mat-icon>
+        <h3>No hay productos disponibles</h3>
+        <p>Comienza creando tu primer producto</p>
+        <button mat-raised-button color="primary" routerLink="/products/new" *ngIf="isLoggedIn()">
+          <mat-icon>add</mat-icon>
+          Crear Primer Producto
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

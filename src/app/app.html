@@ -1,22 +1,23 @@
-<nav class="navigation">
-  <div class="nav-container">
-    <h1 class="nav-title">Sistema de Gestión</h1>
-    <div class="nav-buttons">
-      <button class="nav-btn" (click)="navigateTo('/categories')">
-        📁 Categorías
-      </button>
-      <button class="nav-btn" (click)="navigateTo('/product-types')">
-        🏷️ Tipos de Producto
-      </button>
-      <button class="nav-btn" (click)="navigateTo('/products')">
-        📦 Productos
-      </button>
-      <button class="nav-btn" (click)="navigateTo('/home')">
-        🏠 Inicio
-      </button>
-    </div>
-  </div>
-</nav>
+<mat-toolbar color="primary" class="app-toolbar">
+  <span class="app-title">Sistema de Gestión</span>
+  <span class="spacer"></span>
+  <button mat-button (click)="navigateTo('/home')">
+    <mat-icon>home</mat-icon>
+    Inicio
+  </button>
+  <button mat-button (click)="navigateTo('/categories')">
+    <mat-icon>category</mat-icon>
+    Categorías
+  </button>
+  <button mat-button (click)="navigateTo('/product-types')">
+    <mat-icon>label</mat-icon>
+    Tipos de Producto
+  </button>
+  <button mat-button (click)="navigateTo('/products')">
+    <mat-icon>inventory</mat-icon>
+    Productos
+  </button>
+</mat-toolbar>
 
 <main class="main-content">
   <router-outlet></router-outlet>

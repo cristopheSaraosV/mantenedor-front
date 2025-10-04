@@ -1,59 +1,99 @@
 <div class="categories-container">
-  <div class="header">
-    <h1>📂 Gestión de Categorías</h1>
-    <div class="actions">
-      <a routerLink="/categories/new" class="btn btn-primary" *ngIf="isLoggedIn()">
-        ➕ Nueva Categoría
-      </a>
-    </div>
-  </div>
+  <mat-card class="page-header">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>category</mat-icon>
+        Gestión de Categorías
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-actions *ngIf="isLoggedIn()">
+      <button mat-raised-button color="primary" routerLink="/categories/new">
+        <mat-icon>add</mat-icon>
+        Nueva Categoría
+      </button>
+    </mat-card-actions>
+  </mat-card>
 
-  <div class="loading" *ngIf="loading">
-    <p>🔄 Cargando categorías...</p>
-  </div>
-
-  <div class="error" *ngIf="error">
-    <p>❌ {{ error }}</p>
-    <button (click)="loadCategories()" class="btn btn-secondary">Reintentar</button>
-  </div>
-
-  <div class="categories-grid" *ngIf="!loading && !error">
-    <div class="category-card" *ngFor="let category of categories">
-      <div class="category-icon" *ngIf="category.icon">
-        <span class="icon">{{ category.icon }}</span>
+  <mat-card *ngIf="loading" class="loading-card">
+    <mat-card-content>
+      <div class="loading-content">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p>Cargando categorías...</p>
       </div>
-      <div class="category-info">
-        <h3>{{ category.name }}</h3>
-        <p class="description" *ngIf="category.description">{{ category.description }}</p>
-        <div class="category-stats">
-          <span class="product-types-count">
-            📦 {{ getProductTypesCount(category) }} tipos de productos
-          </span>
-          <span class="status" [class.active]="category.isActive" [class.inactive]="!category.isActive">
-            {{ category.isActive ? '✅ Activa' : '❌ Inactiva' }}
-          </span>
-        </div>
-        <div class="category-actions" *ngIf="isLoggedIn()">
-          <a [routerLink]="['/categories/edit', category.id]" class="btn btn-sm btn-secondary">
-            ✏️ Editar
-          </a>
-          <a [routerLink]="['/product-types', 'category', category.id]" class="btn btn-sm btn-info">
-            📦 Ver Tipos
-          </a>
-          <button 
-            (click)="deleteCategory(category.id!)" 
-            class="btn btn-sm btn-danger">
-            🗑️ Eliminar
-          </button>
-        </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="error" class="error-card">
+    <mat-card-content>
+      <div class="error-content">
+        <mat-icon color="warn">error</mat-icon>
+        <p>{{ error }}</p>
+        <button mat-raised-button color="accent" (click)="loadCategories()">
+          <mat-icon>refresh</mat-icon>
+          Reintentar
+        </button>
       </div>
-    </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="categories-grid" *ngIf="!loading && !error && categories.length > 0">
+    <mat-card class="category-card" *ngFor="let category of categories">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon *ngIf="category.icon">{{ category.icon }}</mat-icon>
+          {{ category.name }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          <div class="status-buttons">
+            <button mat-mini-fab 
+                    [color]="category.isActive ? 'primary' : 'warn'"
+                    class="status-button">
+              <mat-icon>{{ category.isActive ? 'check_circle' : 'cancel' }}</mat-icon>
+            </button>
+            <span class="status-text">{{ category.isActive ? 'Activa' : 'Inactiva' }}</span>
+            
+            <button mat-mini-fab 
+                    color="accent"
+                    class="count-button">
+              <mat-icon>inventory</mat-icon>
+            </button>
+            <span class="count-text">{{ getProductTypesCount(category) }} tipos</span>
+          </div>
+        </mat-card-subtitle>
+      </mat-card-header>
+      
+      <mat-card-content *ngIf="category.description">
+        <p>{{ category.description }}</p>
+      </mat-card-content>
+      
+      <mat-card-actions *ngIf="isLoggedIn()" class="category-actions">
+        <button mat-button color="primary" [routerLink]="['/categories/edit', category.id]">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </button>
+        <button mat-button color="accent" [routerLink]="['/product-types', 'category', category.id]">
+          <mat-icon>inventory</mat-icon>
+          Ver Tipos
+        </button>
+        <button mat-button color="warn" (click)="deleteCategory(category.id!)">
+          <mat-icon>delete</mat-icon>
+          Eliminar
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 
-  <div class="empty-state" *ngIf="!loading && !error && categories.length === 0">
-    <p>📭 No hay categorías disponibles</p>
-    <a routerLink="/categories/new" class="btn btn-primary" *ngIf="isLoggedIn()">
-      ➕ Crear Primera Categoría
-    </a>
-  </div>
+  <mat-card *ngIf="!loading && !error && categories.length === 0" class="empty-state">
+    <mat-card-content>
+      <div class="empty-content">
+        <mat-icon>folder_open</mat-icon>
+        <h3>No hay categorías disponibles</h3>
+        <p>Comienza creando tu primera categoría</p>
+        <button mat-raised-button color="primary" routerLink="/categories/new" *ngIf="isLoggedIn()">
+          <mat-icon>add</mat-icon>
+          Crear Primera Categoría
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

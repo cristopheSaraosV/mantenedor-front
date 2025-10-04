@@ -1,5 +1,50 @@
-<div>
-  <h2>Bienvenido 🎉</h2>
-  <p>Estás logueado con tu token.</p>
-  <button (click)="logout()">Salir</button>
+<div class="home-container">
+  <mat-card class="welcome-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>home</mat-icon>
+        Bienvenido al Sistema de Gestión
+      </mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <p class="welcome-text">
+        <mat-icon>check_circle</mat-icon>
+        Has iniciado sesión correctamente con tu token de autenticación.
+      </p>
+      
+      <div class="features-grid">
+        <mat-card class="feature-card">
+          <mat-card-content>
+            <mat-icon>category</mat-icon>
+            <h3>Gestionar Categorías</h3>
+            <p>Administra las categorías de productos</p>
+          </mat-card-content>
+        </mat-card>
+        
+        <mat-card class="feature-card">
+          <mat-card-content>
+            <mat-icon>label</mat-icon>
+            <h3>Tipos de Producto</h3>
+            <p>Configura los tipos de productos disponibles</p>
+          </mat-card-content>
+        </mat-card>
+        
+        <mat-card class="feature-card">
+          <mat-card-content>
+            <mat-icon>inventory</mat-icon>
+            <h3>Inventario</h3>
+            <p>Gestiona el inventario de productos</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-card-content>
+    
+    <mat-card-actions>
+      <button mat-raised-button color="warn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Cerrar Sesión
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </div>

@@ -1,1 +1,283 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import './override-material.css';
+
+/* Material Icons */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+/* ========================================
+   🎨 SISTEMA DE VARIABLES DE COLORES
+   ======================================== */
+
+:root {
+  /* ========================================
+     🎨 VARIABLES GLOBALES DE COLORES
+     ======================================== */
+     
+  
+  /* CAMBIA ESTOS COLORES PARA PERSONALIZAR TODO */
+  --color-primary: #1653a3;           /* Color principal (dorado) */
+  --color-primary-dark: #7a5200;      /* Color principal oscuro */
+  --color-accent: #ff4081;            /* Color accent (rosa) */
+  --color-error: #e73f33;             /* Color error (rojo) */
+  --color-success: #4caf50;           /* Color éxito (verde) */
+  --color-warning: #ff9800;           /* Color advertencia (naranja) */
+  
+  /* Colores de Fondo */
+  --color-background: #f5f5f5;        /* Fondo principal */
+  --color-surface: #ffffff;           /* Color de superficie */
+  
+  /* Colores de Texto */
+  --color-text: #212121;              /* Texto principal */
+  --color-text-on-primary: #ffffff;   /* Texto sobre color primario */
+  
+  /* Colores de Borde */
+  --color-border: #e0e0e0;            /* Color de borde */
+  
+  /* Colores de Sombra */
+  --color-shadow: rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  
+  /* Colores de Tooltip */
+  --color-tooltip-bg: var(--color-text);        /* Fondo tooltip */
+  --color-tooltip-text: var(--color-text-on-primary); /* Texto tooltip */
+
+}
+
+/* ========================================
+   🌙 TEMA OSCURO (Opcional)
+   ======================================== */
+
+[data-theme="dark"] {
+  --background-primary: #121212;
+  --background-secondary: #1e1e1e;
+  --background-tertiary: #2d2d2d;
+  --surface-color: #1e1e1e;
+  --surface-variant: #2d2d2d;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --text-disabled: #666666;
+  --border-color: #333333;
+  --shadow-light: rgba(0, 0, 0, 0.3);
+  --shadow-medium: rgba(0, 0, 0, 0.4);
+  --shadow-dark: rgba(0, 0, 0, 0.5);
+}
+
+/* ========================================
+   🎨 TEMA PERSONALIZADO (Ejemplo)
+   ======================================== */
+
+[data-theme="custom"] {
+  --primary-color: #673ab7;           /* Púrpura personalizado */
+  --accent-color: #ff6f00;            /* Naranja personalizado */
+  --success-color: #00c853;           /* Verde personalizado */
+  --warning-color: #ffab00;           /* Amarillo personalizado */
+  --error-color: #d50000;             /* Rojo personalizado */
+}
+
+/* ========================================
+   📱 VARIABLES RESPONSIVE (Solo esenciales)
+   ======================================== */
+
+// :root {
+//   --spacing-sm: 0.5rem;     /* 8px */
+//   --spacing-md: 1rem;       /* 16px */
+//   --spacing-lg: 1.5rem;     /* 24px */
+  
+//   --border-radius-sm: 4px;
+//   --border-radius-md: 8px;
+  
+//   --transition-fast: 0.15s ease;
+//   --transition-normal: 0.3s ease;
+// }
+
+/* ========================================
+   🎯 ESTILOS GLOBALES CON VARIABLES
+   ======================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0; 
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* Material Components con Variables */
+.mat-mdc-card {
+  border-radius: var(--border-radius-md);
+  background-color: var(--card-background);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 2px 4px var(--card-shadow);
+  transition: box-shadow var(--transition-normal);
+}
+
+.mat-mdc-card:hover {
+  box-shadow: 0 4px 8px var(--card-hover-shadow);
+}
+
+.mat-mdc-button {
+  border-radius: var(--border-radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+/* ========================================
+   🎨 COLORES PARA COMPONENTES IMPLEMENTADOS
+   ======================================== */
+
+/* SOBRESCRIBIR VARIABLES GLOBALES DE MATERIAL - ESTRATEGIA AGRESIVA */
+:root {
+  --mdc-theme-primary: var(--color-primary) !important;
+  --mat-toolbar-container-background-color: var(--color-primary) !important;
+  --mat-toolbar-container-text-color: var(--color-text-on-primary) !important;
+}
+
+/* FORZAR COLOR PRIMARIO EN TODOS LOS TOOLBARS */
+mat-toolbar,
+.mat-mdc-toolbar,
+.mat-toolbar,
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  background-color: var(--color-primary) !important;
+  background: var(--color-primary) !important;
+  color: var(--color-text-on-primary) !important;
+}
+
+/* FORZAR COLOR PRIMARIO EN ELEMENTOS DEL TOOLBAR */
+mat-toolbar *,
+.mat-mdc-toolbar *,
+.mat-toolbar * {
+  color: var(--color-text-on-primary) !important;
+}
+
+/* 1. TOOLBAR (app.html) - FORZAR COLOR PRIMARIO */
+.mat-mdc-toolbar.mat-primary {
+  --mat-toolbar-container-background-color: var(--color-primary) !important;
+  background-color: var(--color-primary) !important;
+  color: var(--color-text-on-primary) !important;
+}
+
+.mat-mdc-toolbar.mat-primary .mat-mdc-button {
+  color: var(--color-text-on-primary) !important;
+}
+
+.mat-mdc-toolbar.mat-primary .mat-icon {
+  color: var(--color-text-on-primary) !important;
+}
+
+.mat-mdc-toolbar.mat-primary .app-title {
+  color: var(--color-text-on-primary) !important;
+}
+
+/* Forzar también con mayor especificidad */
+.app-toolbar.mat-mdc-toolbar.mat-primary {
+  background-color: var(--color-primary) !important;
+}
+
+.app-toolbar.mat-mdc-toolbar.mat-primary * {
+  color: var(--color-text-on-primary) !important;
+}
+
+/* REGLA MÁS ESPECÍFICA PARA GARANTIZAR EL COLOR PRIMARIO */
+mat-toolbar[color="primary"].app-toolbar.mat-mdc-toolbar.mat-primary {
+  --mat-toolbar-container-background-color: var(--color-primary) !important;
+  background-color: var(--color-primary) !important;
+  background: var(--color-primary) !important;
+}
+
+mat-toolbar[color="primary"].app-toolbar.mat-mdc-toolbar.mat-primary * {
+  color: var(--color-text-on-primary) !important;
+}
+
+/* 2. BOTONES (usados en todos los componentes) */
+.mat-mdc-raised-button.mat-primary {
+  background-color: var(--color-primary) !important;
+  color: var(--color-text-on-primary) !important;
+}
+
+.mat-mdc-raised-button.mat-accent {
+  background-color: var(--color-accent) !important;
+  color: var(--color-text-on-primary) !important;
+}
+
+.mat-mdc-raised-button.mat-warn {
+  background-color: var(--color-error) !important;
+  color: var(--color-text-on-primary) !important;
+}
+
+/* 3. CARDS (usadas en home, login, categories, products) */
+.mat-mdc-card {
+  background-color: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  box-shadow: 0 2px 4px var(--color-shadow) !important;
+}
+
+/* 4. FORM FIELDS (usados en login) */
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-outline {
+  color: var(--color-primary) !important;
+}
+
+
+/* 6. PROGRESS SPINNER (usado en loading) */
+.mat-mdc-progress-spinner circle {
+  stroke: var(--color-primary) !important;
+}
+
+/* 7. ICONOS (usados en todos los componentes) */
+.mat-icon[color="warn"] {
+  color: var(--color-error) !important;
+}
+
+/* 8. TOOLTIPS (usados en todos los componentes) */
+.mat-mdc-tooltip {
+  background-color: var(--color-tooltip-bg) !important;
+  color: var(--color-tooltip-text) !important;
+}
+
+/* Utilidades de Color (Solo esenciales) */
+.text-primary { color: var(--color-text) !important; }
+.text-white { color: var(--color-text-on-primary) !important; }
+
+.bg-primary { background-color: var(--color-primary) !important; }
+.bg-white { background-color: var(--color-surface) !important; }
+
+/* ========================================
+   🚨 FORZAR COLOR PRIMARIO - ÚLTIMA REGLA
+   ======================================== */
+
+/* Esta regla se ejecuta al final para sobrescribir TODO */
+mat-toolbar[color="primary"],
+mat-toolbar.mat-primary,
+.mat-mdc-toolbar.mat-primary,
+.app-toolbar {
+  background-color: var(--color-primary) !important;
+  background: var(--color-primary) !important;
+  background-image: none !important;
+  background-size: auto !important;
+  background-repeat: repeat !important;
+  background-attachment: scroll !important;
+  background-position: 0% 0% !important;
+}
+
+mat-toolbar[color="primary"] *,
+mat-toolbar.mat-primary *,
+.mat-mdc-toolbar.mat-primary *,
+.app-toolbar * {
+  color: var(--color-text-on-primary) !important;
+}
+
+/* Forzar también con atributo style inline si es necesario */
+mat-toolbar[style*="background"] {
+  background-color: var(--color-primary) !important;
+  background: var(--color-primary) !important;
+}
+

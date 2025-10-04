@@ -1,0 +1,133 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: var(--spacing-xl);
+  background-color: var(--background-primary);
+}
+
+.login-card {
+  max-width: 400px;
+  width: 100%;
+  background-color: var(--card-background);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 4px 20px var(--shadow-medium);
+  border-radius: var(--border-radius-lg);
+  transition: box-shadow var(--transition-normal);
+  
+  &:hover {
+    box-shadow: 0 8px 30px var(--shadow-dark);
+  }
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.login-button {
+  margin-top: var(--spacing-md);
+  height: 48px;
+  font-size: var(--font-size-md);
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border-radius: var(--border-radius-sm);
+  transition: all var(--transition-fast);
+  
+  &:hover {
+    background-color: var(--btn-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px var(--shadow-medium);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--error-light);
+  border: 1px solid var(--error-color);
+  border-radius: var(--border-radius-sm);
+  color: var(--error-dark);
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-fast);
+  
+  &:hover {
+    background-color: var(--error-color);
+    color: var(--text-on-primary);
+  }
+}
+
+mat-card-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+mat-form-field {
+  .mat-mdc-form-field-focus-overlay {
+    background-color: var(--hover-primary);
+  }
+  
+  .mat-mdc-form-field-outline {
+    color: var(--border-color);
+  }
+  
+  &.mat-focused .mat-mdc-form-field-outline {
+    color: var(--focus-color);
+  }
+}
+
+/* Estados de validación */
+mat-form-field.mat-form-field-invalid {
+  .mat-mdc-form-field-outline {
+    color: var(--form-field-error);
+  }
+}
+
+/* Animaciones personalizadas */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-card {
+  animation: slideInUp var(--transition-slow) ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .login-container {
+    padding: var(--spacing-md);
+  }
+  
+  .login-card {
+    max-width: 100%;
+    margin: var(--spacing-sm);
+  }
+  
+  mat-card-title {
+    font-size: var(--font-size-xl);
+  }
+}

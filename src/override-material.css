@@ -1,0 +1,63 @@
+/* ========================================
+   🚨 OVERRIDE MATERIAL DESIGN - FORZAR COLOR VERDE
+   ======================================== */
+
+/* Sobrescribir TODAS las variables de Material Design */
+:root {
+  --mdc-theme-primary: var(--color-primary) !important;
+  --mat-toolbar-container-background-color: var(--color-primary) !important;
+  --mat-toolbar-container-text-color: var(--color-text-on-primary) !important;
+  --mat-toolbar-standard-background-color: var(--color-primary) !important;
+  --mat-toolbar-standard-text-color: var(--color-text-on-primary) !important;
+}
+
+/* Forzar color primario en TODOS los toolbars posibles */
+mat-toolbar,
+.mat-mdc-toolbar,
+.mat-toolbar,
+.mat-toolbar-row,
+.mat-toolbar-single-row,
+.mat-toolbar-multiple-rows {
+  background-color: var(--color-primary) !important;
+  background: var(--color-primary) !important;
+  color: var(--color-text-on-primary) !important;
+}
+
+/* Forzar color blanco en TODOS los elementos del toolbar */
+mat-toolbar *,
+.mat-mdc-toolbar *,
+.mat-toolbar *,
+.mat-toolbar-row *,
+.mat-toolbar-single-row * {
+  color: var(--color-text-on-primary) !important;
+}
+
+/* Específicamente para el toolbar con color="primary" */
+mat-toolbar[color="primary"] {
+  background-color: var(--color-primary) !important;
+  background: var(--color-primary) !important;
+}
+
+/* Específicamente para el toolbar con clase app-toolbar */
+.app-toolbar {
+  background-color: var(--color-primary) !important;
+  background: var(--color-primary) !important;
+}
+
+/* Forzar también con mayor especificidad */
+mat-toolbar[color="primary"].app-toolbar.mat-mdc-toolbar.mat-primary {
+  background-color: var(--color-primary) !important;
+  background: var(--color-primary) !important;
+}
+
+/* Sobrescribir cualquier estilo inline */
+mat-toolbar[style] {
+  background-color: var(--color-primary) !important;
+  background: var(--color-primary) !important;
+}
+
+/* TOOLTIPS - Forzar texto blanco */
+.mat-mdc-tooltip {
+  background-color: var(--color-tooltip-bg) !important;
+  color: var(--color-tooltip-text) !important;
+}

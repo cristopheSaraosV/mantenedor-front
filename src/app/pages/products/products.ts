@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProductService, Product } from '../../services/product.service';
 import { AuthService } from '../../auth.service';
+import { MaterialModules } from '../../material.module';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ...MaterialModules],
   templateUrl: './products.html',
   styleUrl: './products.scss'
 })

@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { ProductService, ProductType, Category } from '../../services/product.service';
 import { AuthService } from '../../auth.service';
+import { MaterialModules } from '../../material.module';
 
 @Component({
   selector: 'app-product-types',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ...MaterialModules],
   templateUrl: './product-types.html',
   styleUrl: './product-types.scss'
 })

@@ -1,0 +1,237 @@
+/* ========================================
+   🎨 EJEMPLOS DE TEMAS PERSONALIZADOS
+   ======================================== */
+
+/* 
+   Para aplicar cualquiera de estos temas, simplemente copia las variables
+   al archivo styles.scss en la sección :root
+*/
+
+/* ========================================
+   🌊 TEMA AZUL OCÉANO
+   ======================================== */
+[data-theme="ocean"] {
+  --primary-color: #0066cc;
+  --primary-light: #4d94ff;
+  --primary-dark: #004499;
+  --accent-color: #00bcd4;
+  --accent-light: #4dd0e1;
+  --accent-dark: #00838f;
+  --success-color: #00c853;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  --info-color: #2196f3;
+}
+
+/* ========================================
+   🌿 TEMA VERDE NATURALEZA
+   ======================================== */
+[data-theme="nature"] {
+  --primary-color: #4caf50;
+  --primary-light: #81c784;
+  --primary-dark: #388e3c;
+  --accent-color: #8bc34a;
+  --accent-light: #aed581;
+  --accent-dark: #689f38;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  --info-color: #00bcd4;
+}
+
+/* ========================================
+   🔥 TEMA ROJO FUEGO
+   ======================================== */
+[data-theme="fire"] {
+  --primary-color: #f44336;
+  --primary-light: #e57373;
+  --primary-dark: #d32f2f;
+  --accent-color: #ff5722;
+  --accent-light: #ff8a65;
+  --accent-dark: #d84315;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  --info-color: #2196f3;
+}
+
+/* ========================================
+   💜 TEMA PÚRPURA REAL
+   ======================================== */
+[data-theme="royal"] {
+  --primary-color: #673ab7;
+  --primary-light: #9575cd;
+  --primary-dark: #512da8;
+  --accent-color: #9c27b0;
+  --accent-light: #ba68c8;
+  --accent-dark: #7b1fa2;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  --info-color: #2196f3;
+}
+
+/* ========================================
+   🌅 TEMA DORADO ATARDECER
+   ======================================== */
+[data-theme="sunset"] {
+  --primary-color: #ff9800;
+  --primary-light: #ffb74d;
+  --primary-dark: #f57c00;
+  --accent-color: #ff5722;
+  --accent-light: #ff8a65;
+  --accent-dark: #d84315;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  --info-color: #2196f3;
+}
+
+/* ========================================
+   🌙 TEMA OSCURO COMPLETO
+   ======================================== */
+[data-theme="dark-complete"] {
+  --background-primary: #121212;
+  --background-secondary: #1e1e1e;
+  --background-tertiary: #2d2d2d;
+  --surface-color: #1e1e1e;
+  --surface-variant: #2d2d2d;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --text-disabled: #666666;
+  --text-hint: #888888;
+  --border-color: #333333;
+  --border-light: #2a2a2a;
+  --border-dark: #404040;
+  --shadow-light: rgba(0, 0, 0, 0.3);
+  --shadow-medium: rgba(0, 0, 0, 0.4);
+  --shadow-dark: rgba(0, 0, 0, 0.5);
+  --primary-color: #bb86fc;
+  --accent-color: #03dac6;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #cf6679;
+  --info-color: #2196f3;
+}
+
+/* ========================================
+   🎨 TEMA CORPORATIVO AZUL
+   ======================================== */
+[data-theme="corporate"] {
+  --primary-color: #1976d2;
+  --primary-light: #42a5f5;
+  --primary-dark: #1565c0;
+  --accent-color: #ff4081;
+  --accent-light: #ff79b0;
+  --accent-dark: #c60055;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  --info-color: #2196f3;
+  --background-primary: #fafafa;
+  --text-primary: #212121;
+  --text-secondary: #757575;
+}
+
+/* ========================================
+   🌈 TEMA ARCOÍRIS
+   ======================================== */
+[data-theme="rainbow"] {
+  --primary-color: #e91e63;
+  --primary-light: #f06292;
+  --primary-dark: #c2185b;
+  --accent-color: #00bcd4;
+  --accent-light: #4dd0e1;
+  --accent-dark: #00838f;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  --info-color: #2196f3;
+}
+
+/* ========================================
+   🏢 TEMA PROFESIONAL GRIS
+   ======================================== */
+[data-theme="professional"] {
+  --primary-color: #607d8b;
+  --primary-light: #90a4ae;
+  --primary-dark: #455a64;
+  --accent-color: #ff5722;
+  --accent-light: #ff8a65;
+  --accent-dark: #d84315;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  --info-color: #2196f3;
+  --background-primary: #f5f5f5;
+  --text-primary: #263238;
+  --text-secondary: #546e7a;
+}
+
+/* ========================================
+   🍃 TEMA MINIMALISTA
+   ======================================== */
+[data-theme="minimal"] {
+  --primary-color: #424242;
+  --primary-light: #6d6d6d;
+  --primary-dark: #212121;
+  --accent-color: #757575;
+  --accent-light: #9e9e9e;
+  --accent-dark: #424242;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  --info-color: #2196f3;
+  --background-primary: #ffffff;
+  --background-secondary: #fafafa;
+  --text-primary: #212121;
+  --text-secondary: #757575;
+  --border-color: #e0e0e0;
+}
+
+/* ========================================
+   🎯 CÓMO APLICAR UN TEMA
+   ======================================== */
+
+/*
+  1. Copia las variables del tema que quieras usar
+  2. Pégalas en el archivo styles.scss en la sección :root
+  3. O aplica el tema usando el atributo data-theme en el HTML:
+
+   <html data-theme="ocean">
+   <html data-theme="nature">
+   <html data-theme="fire">
+   <html data-theme="royal">
+   <html data-theme="sunset">
+   <html data-theme="dark-complete">
+   <html data-theme="corporate">
+   <html data-theme="rainbow">
+   <html data-theme="professional">
+   <html data-theme="minimal">
+
+   También puedes cambiar el tema dinámicamente con JavaScript:
+   
+   document.documentElement.setAttribute('data-theme', 'ocean');
+*/
+
+/* ========================================
+   🎨 EJEMPLO DE TEMA PERSONALIZADO
+   ======================================== */
+
+/*
+   Para crear tu propio tema, simplemente define las variables que quieras cambiar:
+
+   :root {
+     --primary-color: #tu-color-primario;
+     --accent-color: #tu-color-accent;
+     --success-color: #tu-color-exito;
+     --warning-color: #tu-color-advertencia;
+     --error-color: #tu-color-error;
+     --info-color: #tu-color-informacion;
+     --background-primary: #tu-fondo-principal;
+     --text-primary: #tu-texto-principal;
+     --text-secondary: #tu-texto-secundario;
+   }
+
+   ¡Y listo! Toda la aplicación usará tus colores personalizados.
+*/
