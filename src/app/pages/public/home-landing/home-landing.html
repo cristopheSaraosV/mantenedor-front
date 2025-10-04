@@ -1,1 +1,40 @@
-<p>home-landing works!</p>
+<mat-toolbar color="primary" class="toolbar">
+  <span class="logo">ENERTEST</span>
+  <span class="spacer"></span>
+  <button mat-button>Inicio</button>
+  <button mat-button (click)="goToAdmin()">
+    <mat-icon>admin_panel_settings</mat-icon>
+    Admin
+  </button>
+</mat-toolbar>
+
+<section class="hero">
+  <div class="hero-text">
+    <h2>Cámaras Infrarrojas Industriales portátiles, fijas y para Dron</h2>
+    <img src="assets/infra.png" alt="Cámaras Infrarrojas">
+  </div>
+</section>
+
+<section class="catalogo">
+  <h3>Visite nuestro catálogo de productos</h3>
+
+  <mat-grid-list cols="4" rowHeight="400px" gutterSize="20px">
+    <mat-grid-tile *ngFor="let producto of productos">
+      <mat-card class="producto-card">
+        <img mat-card-image [src]="producto.img" alt="{{producto.nombre}}">
+        <mat-card-title>{{producto.nombre}}</mat-card-title>
+        <mat-card-content>
+          <p>{{producto.descripcion}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary">Ver Catálogo</button>
+          <button mat-stroked-button color="accent">Cotizar Producto</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</section>
+
+<footer class="footer">
+  <p>Instrumentación 2025. Todos los derechos reservados. | Concha y Toro 65 – Santiago Centro</p>
+</footer>

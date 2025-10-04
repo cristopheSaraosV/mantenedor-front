@@ -1,25 +1,25 @@
-<!-- Toolbar del Sistema de Gestión - Solo visible en rutas del sistema -->
-<mat-toolbar color="primary" class="app-toolbar" *ngIf="isSistemaRoute()">
+<!-- Toolbar del Sistema de Gestión - Solo visible en rutas del admin -->
+<mat-toolbar color="primary" class="app-toolbar" *ngIf="isAdminRoute()">
   <span class="app-title">Sistema de Gestión</span>
   <span class="spacer"></span>
-  <button mat-button (click)="navigateTo('/sistema/home')">
+  <button mat-button (click)="navigateTo('/admin/home')">
     <mat-icon>home</mat-icon>
     Inicio
   </button>
-  <button mat-button (click)="navigateTo('/sistema/categories')">
+  <button mat-button (click)="navigateTo('/admin/categories')">
     <mat-icon>category</mat-icon>
     Categorías
   </button>
-  <button mat-button (click)="navigateTo('/sistema/product-types')">
+  <button mat-button (click)="navigateTo('/admin/product-types')">
     <mat-icon>label</mat-icon>
     Tipos de Producto
   </button>
-  <button mat-button (click)="navigateTo('/sistema/products')">
+  <button mat-button (click)="navigateTo('/admin/products')">
     <mat-icon>inventory</mat-icon>
     Productos
   </button>
 </mat-toolbar>
 
-<main class="main-content" [class.with-toolbar]="isSistemaRoute()">
+<main class="main-content" [class.with-toolbar]="isAdminRoute()">
   <router-outlet></router-outlet>
 </main>

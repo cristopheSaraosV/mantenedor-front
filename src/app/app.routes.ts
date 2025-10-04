@@ -15,7 +15,7 @@ export const routes: Routes = [
   { path: '', component: HomeLanding },
   
   // Sistema de Gestión - Rutas protegidas
-  { path: 'sistema', children: [
+  { path: 'admin', children: [
     { path: 'login', component: Login },
     { path: 'home', component: Home, canActivate: [authGuard] },
     
@@ -37,12 +37,12 @@ export const routes: Routes = [
     { path: 'product-types/category/:categoryId', component: ProductTypesComponent },
   ]},
   
-  // Redirecciones
-  { path: 'login', redirectTo: '/sistema/login', pathMatch: 'full' },
-  { path: 'home', redirectTo: '/sistema/home', pathMatch: 'full' },
-  { path: 'products', redirectTo: '/sistema/products', pathMatch: 'full' },
-  { path: 'categories', redirectTo: '/sistema/categories', pathMatch: 'full' },
-  { path: 'product-types', redirectTo: '/sistema/product-types', pathMatch: 'full' },
+  // Redirecciones para compatibilidad
+  { path: 'login', redirectTo: '/admin/login', pathMatch: 'full' },
+  { path: 'home', redirectTo: '/admin/home', pathMatch: 'full' },
+  { path: 'products', redirectTo: '/admin/products', pathMatch: 'full' },
+  { path: 'categories', redirectTo: '/admin/categories', pathMatch: 'full' },
+  { path: 'product-types', redirectTo: '/admin/product-types', pathMatch: 'full' },
   
   { path: '**', redirectTo: '' }
 ];

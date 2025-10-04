@@ -27,7 +27,7 @@ export class App {
     this.router.navigate([route]);
   }
 
-  isSistemaRoute(): boolean {
-    return this.currentRoute.startsWith('/sistema');
+  isAdminRoute(): boolean {
+    return this.currentRoute.startsWith('/admin');
   }
 }
