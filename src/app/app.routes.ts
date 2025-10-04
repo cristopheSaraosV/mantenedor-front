@@ -1,3 +1,4 @@
+import { HomeLanding } from './pages/public/home-landing/home-landing';
 import { Routes } from '@angular/router';
 import { authGuard } from './auth.guard';
 import { Home } from './pages/home/home';
@@ -10,26 +11,38 @@ import { ProductTypesComponent } from './pages/product-types/product-types';
 import { ProductTypeFormComponent } from './pages/product-type-form/product-type-form';
 
 export const routes: Routes = [
-  { path: 'login', component: Login },
-  { path: 'home', component: Home, canActivate: [authGuard] },
+  // HomeLanding - Sistema público separado
+  { path: '', component: HomeLanding },
   
-  // Products
-  { path: 'products', component: ProductsComponent },
-  { path: 'products/new', component: ProductFormComponent, canActivate: [authGuard] },
-  { path: 'products/edit/:id', component: ProductFormComponent, canActivate: [authGuard] },
-  { path: 'products/product-type/:productTypeId', component: ProductsComponent },
+  // Sistema de Gestión - Rutas protegidas
+  { path: 'sistema', children: [
+    { path: 'login', component: Login },
+    { path: 'home', component: Home, canActivate: [authGuard] },
+    
+    // Products
+    { path: 'products', component: ProductsComponent },
+    { path: 'products/new', component: ProductFormComponent, canActivate: [authGuard] },
+    { path: 'products/edit/:id', component: ProductFormComponent, canActivate: [authGuard] },
+    { path: 'products/product-type/:productTypeId', component: ProductsComponent },
+    
+    // Categories
+    { path: 'categories', component: CategoriesComponent },
+    { path: 'categories/new', component: CategoryFormComponent, canActivate: [authGuard] },
+    { path: 'categories/edit/:id', component: CategoryFormComponent, canActivate: [authGuard] },
+    
+    // Product Types
+    { path: 'product-types', component: ProductTypesComponent },
+    { path: 'product-types/new', component: ProductTypeFormComponent, canActivate: [authGuard] },
+    { path: 'product-types/edit/:id', component: ProductTypeFormComponent, canActivate: [authGuard] },
+    { path: 'product-types/category/:categoryId', component: ProductTypesComponent },
+  ]},
   
-  // Categories
-  { path: 'categories', component: CategoriesComponent },
-  { path: 'categories/new', component: CategoryFormComponent, canActivate: [authGuard] },
-  { path: 'categories/edit/:id', component: CategoryFormComponent, canActivate: [authGuard] },
+  // Redirecciones
+  { path: 'login', redirectTo: '/sistema/login', pathMatch: 'full' },
+  { path: 'home', redirectTo: '/sistema/home', pathMatch: 'full' },
+  { path: 'products', redirectTo: '/sistema/products', pathMatch: 'full' },
+  { path: 'categories', redirectTo: '/sistema/categories', pathMatch: 'full' },
+  { path: 'product-types', redirectTo: '/sistema/product-types', pathMatch: 'full' },
   
-  // Product Types
-  { path: 'product-types', component: ProductTypesComponent },
-  { path: 'product-types/new', component: ProductTypeFormComponent, canActivate: [authGuard] },
-  { path: 'product-types/edit/:id', component: ProductTypeFormComponent, canActivate: [authGuard] },
-  { path: 'product-types/category/:categoryId', component: ProductTypesComponent },
-  
-  { path: '', redirectTo: '/categories', pathMatch: 'full' },
-  { path: '**', redirectTo: '/categories' }
+  { path: '**', redirectTo: '' }
 ];

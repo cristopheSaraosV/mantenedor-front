@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, Router } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MaterialModules } from './material.module';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,22 @@ import { MaterialModules } from './material.module';
   styleUrl: './app.scss'
 })
 export class App {
-  constructor(private router: Router) {}
+  currentRoute: string = '';
+
+  constructor(private router: Router) {
+    // Escuchar cambios de ruta
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentRoute = event.url;
+      });
+  }
 
   navigateTo(route: string) {
     this.router.navigate([route]);
+  }
+
+  isSistemaRoute(): boolean {
+    return this.currentRoute.startsWith('/sistema');
   }
 }
