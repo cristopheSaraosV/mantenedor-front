@@ -23,7 +23,7 @@ export class Login {
     this.auth.login(this.email, this.password).subscribe({
       next: res => {
         this.auth.saveToken(res.access_token);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/admin/home']);
       },
       error: () => this.error = 'Credenciales inválidas'
     });

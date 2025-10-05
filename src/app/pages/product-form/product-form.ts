@@ -30,7 +30,7 @@ export class ProductFormComponent implements OnInit {
 
   ngOnInit() {
     if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/admin/login']);
       return;
     }
 
@@ -150,7 +150,7 @@ export class ProductFormComponent implements OnInit {
       request.subscribe({
         next: (product) => {
           this.loading = false;
-          this.router.navigate(['/products']);
+          this.router.navigate(['/admin/products']);
         },
         error: (error) => {
           this.error = this.isEditMode 
@@ -173,7 +173,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['/products']);
+    this.router.navigate(['/admin/products']);
   }
 
   getFieldError(fieldName: string): string {

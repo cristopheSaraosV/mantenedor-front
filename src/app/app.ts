@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MaterialModules } from './material.module';
-import { filter } from 'rxjs/operators';
+import { filter,  takeUntil } from 'rxjs/operators';
+import { AuthService } from './auth.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,16 +13,38 @@ import { filter } from 'rxjs/operators';
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
+export class App implements OnInit, OnDestroy {
   currentRoute: string = '';
+  private authService = inject(AuthService);
+  private destroy$ = new Subject<void>();
 
   constructor(private router: Router) {
     // Escuchar cambios de ruta
     this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        takeUntil(this.destroy$)
+      )
       .subscribe((event: NavigationEnd) => {
         this.currentRoute = event.url;
       });
+  }
+
+  ngOnInit() {
+    // Verificar el estado inicial de autenticación
+    this.checkAuthState();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private checkAuthState() {
+    // Si no está autenticado y está en una ruta protegida, redirigir al login
+    if (!this.authService.isLoggedIn() && this.currentRoute.startsWith('/admin') && this.currentRoute !== '/admin/login') {
+      this.router.navigate(['/admin/login']);
+    }
   }
 
   navigateTo(route: string) {
@@ -28,6 +52,13 @@ export class App {
   }
 
   isAdminRoute(): boolean {
-    return this.currentRoute.startsWith('/admin');
+    return this.currentRoute.startsWith('/admin') && 
+           this.currentRoute !== '/admin/login' && 
+           this.authService.isLoggedIn();
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/admin/login']);
   }
 }

@@ -1,4 +1,4 @@
-<!-- Toolbar del Sistema de Gestión - Solo visible en rutas del admin -->
+<!-- Toolbar del Sistema de Gestión - Solo visible en rutas del admin autenticadas -->
 <mat-toolbar color="primary" class="app-toolbar" *ngIf="isAdminRoute()">
   <span class="app-title">Sistema de Gestión</span>
   <span class="spacer"></span>
@@ -17,6 +17,10 @@
   <button mat-button (click)="navigateTo('/admin/products')">
     <mat-icon>inventory</mat-icon>
     Productos
+  </button>
+  <button mat-button color="warn" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    Cerrar Sesión
   </button>
 </mat-toolbar>
 

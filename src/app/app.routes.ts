@@ -20,21 +20,21 @@ export const routes: Routes = [
     { path: 'home', component: Home, canActivate: [authGuard] },
     
     // Products
-    { path: 'products', component: ProductsComponent },
+    { path: 'products', component: ProductsComponent, canActivate: [authGuard] },
     { path: 'products/new', component: ProductFormComponent, canActivate: [authGuard] },
     { path: 'products/edit/:id', component: ProductFormComponent, canActivate: [authGuard] },
-    { path: 'products/product-type/:productTypeId', component: ProductsComponent },
+    { path: 'products/product-type/:productTypeId', component: ProductsComponent, canActivate: [authGuard] },
     
     // Categories
-    { path: 'categories', component: CategoriesComponent },
+    { path: 'categories', component: CategoriesComponent, canActivate: [authGuard] },
     { path: 'categories/new', component: CategoryFormComponent, canActivate: [authGuard] },
     { path: 'categories/edit/:id', component: CategoryFormComponent, canActivate: [authGuard] },
     
     // Product Types
-    { path: 'product-types', component: ProductTypesComponent },
+    { path: 'product-types', component: ProductTypesComponent, canActivate: [authGuard] },
     { path: 'product-types/new', component: ProductTypeFormComponent, canActivate: [authGuard] },
     { path: 'product-types/edit/:id', component: ProductTypeFormComponent, canActivate: [authGuard] },
-    { path: 'product-types/category/:categoryId', component: ProductTypesComponent },
+    { path: 'product-types/category/:categoryId', component: ProductTypesComponent, canActivate: [authGuard] },
   ]},
   
   // Redirecciones para compatibilidad
@@ -44,5 +44,6 @@ export const routes: Routes = [
   { path: 'categories', redirectTo: '/admin/categories', pathMatch: 'full' },
   { path: 'product-types', redirectTo: '/admin/product-types', pathMatch: 'full' },
   
-  { path: '**', redirectTo: '' }
+  // Ruta wildcard para manejar rutas no encontradas
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

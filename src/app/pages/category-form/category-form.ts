@@ -27,7 +27,7 @@ export class CategoryFormComponent implements OnInit {
 
   ngOnInit() {
     if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/admin/login']);
       return;
     }
 
@@ -89,7 +89,7 @@ export class CategoryFormComponent implements OnInit {
       request.subscribe({
         next: (category) => {
           this.loading = false;
-          this.router.navigate(['/categories']);
+          this.router.navigate(['/admin/categories']);
         },
         error: (error) => {
           this.error = this.isEditMode 
@@ -112,7 +112,7 @@ export class CategoryFormComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['/categories']);
+    this.router.navigate(['/admin/categories']);
   }
 
   getFieldError(fieldName: string): string {

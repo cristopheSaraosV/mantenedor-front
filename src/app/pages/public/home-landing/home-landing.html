@@ -18,21 +18,62 @@
 <section class="catalogo">
   <h3>Visite nuestro catálogo de productos</h3>
 
-  <mat-grid-list cols="4" rowHeight="400px" gutterSize="20px">
+  <!-- Estado de carga -->
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Cargando productos...</p>
+  </div>
+
+  <!-- Estado de error -->
+  <div *ngIf="error && !loading" class="error-container">
+    <mat-icon color="warn">error</mat-icon>
+    <p>{{ error }}</p>
+    <button mat-raised-button color="accent" (click)="loadProducts()">
+      <mat-icon>refresh</mat-icon>
+      Reintentar
+    </button>
+  </div>
+
+  <!-- Lista de productos -->
+  <mat-grid-list cols="4" rowHeight="400px" gutterSize="20px" *ngIf="!loading && !error && productos.length > 0">
     <mat-grid-tile *ngFor="let producto of productos">
       <mat-card class="producto-card">
-        <img mat-card-image [src]="producto.img" alt="{{producto.nombre}}">
-        <mat-card-title>{{producto.nombre}}</mat-card-title>
+        <img mat-card-image 
+             [src]="producto.imageUrl || 'https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Sin+Imagen'" 
+             alt="Imagen del producto">
+        <mat-card-title>{{ producto.model }}</mat-card-title>
+        <mat-card-subtitle *ngIf="producto.brand">{{ producto.brand }}</mat-card-subtitle>
         <mat-card-content>
-          <p>{{producto.descripcion}}</p>
+          <p *ngIf="producto.description">{{ producto.description }}</p>
+          <div class="product-details" *ngIf="producto.price || producto.country">
+            <p *ngIf="producto.price" class="price">
+              <mat-icon>euro</mat-icon>
+              {{ formatPrice(producto.price) }}
+            </p>
+            <p *ngIf="producto.country" class="country">
+              <mat-icon>public</mat-icon>
+              {{ producto.country }}
+            </p>
+          </div>
+          <div class="product-type" *ngIf="producto.productType">
+            <mat-icon>label</mat-icon>
+            <span>{{ producto.productType.name }}</span>
+          </div>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary">Ver Catálogo</button>
+          <button mat-raised-button color="primary">Ver Detalles</button>
           <button mat-stroked-button color="accent">Cotizar Producto</button>
         </mat-card-actions>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
+
+  <!-- Estado vacío -->
+  <div *ngIf="!loading && !error && productos.length === 0" class="empty-container">
+    <mat-icon>inventory_2</mat-icon>
+    <h3>No hay productos disponibles</h3>
+    <p>Pronto tendremos nuevos productos en nuestro catálogo</p>
+  </div>
 </section>
 
 <footer class="footer">

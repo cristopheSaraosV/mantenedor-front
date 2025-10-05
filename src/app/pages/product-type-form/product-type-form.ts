@@ -29,7 +29,7 @@ export class ProductTypeFormComponent implements OnInit {
 
   ngOnInit() {
     if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/admin/login']);
       return;
     }
 
@@ -115,7 +115,7 @@ export class ProductTypeFormComponent implements OnInit {
       request.subscribe({
         next: (productType) => {
           this.loading = false;
-          this.router.navigate(['/product-types', 'category', productType.categoryId]);
+          this.router.navigate(['/admin/product-types', 'category', productType.categoryId]);
         },
         error: (error) => {
           this.error = this.isEditMode 
@@ -140,9 +140,9 @@ export class ProductTypeFormComponent implements OnInit {
   onCancel() {
     const categoryId = this.productTypeForm.get('categoryId')?.value;
     if (categoryId) {
-      this.router.navigate(['/product-types', 'category', categoryId]);
+      this.router.navigate(['/admin/product-types', 'category', categoryId]);
     } else {
-      this.router.navigate(['/categories']);
+      this.router.navigate(['/admin/categories']);
     }
   }
 

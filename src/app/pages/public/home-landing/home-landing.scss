@@ -85,6 +85,90 @@
   gap: 0.5rem;
 }
 
+.product-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.product-details p {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.price {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.country {
+  color: #666;
+}
+
+.product-type {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #2196f3;
+}
+
+/* Estados de carga, error y vacío */
+.loading-container,
+.error-container,
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.loading-container mat-spinner {
+  margin-bottom: 1rem;
+}
+
+.loading-container p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.error-container mat-icon {
+  font-size: 3rem;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+}
+
+.error-container p {
+  color: #f44336;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.empty-container mat-icon {
+  font-size: 4rem;
+  width: 4rem;
+  height: 4rem;
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+.empty-container h3 {
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.empty-container p {
+  color: #999;
+}
+
 .footer {
   background: #333;
   color: white;
