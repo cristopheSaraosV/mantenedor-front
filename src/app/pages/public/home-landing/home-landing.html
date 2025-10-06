@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" class="toolbar">
-  <span class="logo">ENERTEST</span>
+  <span class="logo">FUNKOMANIA</span>
   <span class="spacer"></span>
   <button mat-button>Inicio</button>
   <button mat-button (click)="goToAdmin()">
@@ -8,11 +8,54 @@
   </button>
 </mat-toolbar>
 
-<section class="hero">
-  <div class="hero-text">
-    <h2>Cámaras Infrarrojas Industriales portátiles, fijas y para Dron</h2>
-    <img src="assets/infra.png" alt="Cámaras Infrarrojas">
+<section class="row p-5 ">
+  <div class="col-12">
+    <h2 class="text-center display-8 mt-5">Encuentra lo que necesitas para tu colección.</h2>
   </div>
+ 
+  <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-sm-4 mb-xl-0">
+    <div class="card">
+      <img src="https://mifunko.com/6999-thickbox_default/figura-pop-marvel-spiderman-exclusive.jpg"
+        alt="Cámaras Infrarrojas" />
+      <div class="card-body">
+        <h5 class="card-title">MBAPPE </h5>
+        <p class="card-text">Precio: 100.000</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-sm-4 mb-xl-0">
+    <div class="card">
+      <img src="https://mifunko.com/5629-thickbox_default/figura-pop-dragon-ball-super-beerus-exclusive.jpg"
+        alt="Cámaras Infrarrojas" />
+      <div class="card-body">
+        <h5 class="card-title">MBAPPE </h5>
+        <p class="card-text">Precio: 100.000</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-sm-4 mb-xl-0">
+    <div class="card">
+      <img src="https://mifunko.com/6789-large_default/figura-pop-one-piece-snake-man-luffy.jpg"
+        alt="Cámaras Infrarrojas" />
+      <div class="card-body">
+        <h5 class="card-title">MBAPPE </h5>
+        <p class="card-text">Precio: 100.000</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-sm-4 mb-xl-0">
+    <div class="card">
+      <img src="https://mifunko.com/5100-thickbox_default/figura-pop-disney-pixar-toy-story-rex-exclusive.jpg"
+        alt="Cámaras Infrarrojas" />
+      <div class="card-body">
+        <h5 class="card-title">MBAPPE </h5>
+        <p class="card-text">Precio: 100.000</p>
+      </div>
+    </div>
+  </div>
+
+
+
 </section>
 
 <section class="catalogo">
@@ -38,9 +81,9 @@
   <mat-grid-list cols="4" rowHeight="400px" gutterSize="20px" *ngIf="!loading && !error && productos.length > 0">
     <mat-grid-tile *ngFor="let producto of productos">
       <mat-card class="producto-card">
-        <img mat-card-image 
-             [src]="producto.imageUrl || 'https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Sin+Imagen'" 
-             alt="Imagen del producto">
+        <img mat-card-image
+          [src]="producto.imageUrl || 'https://i5.walmartimages.com/seo/Funko-POP-Football-Kylian-Mbapp-PSG_26b8cdaf-a999-4e78-904a-fe3930e8926c_1.95fa658cc18ab713bc292e2763d63ee6.png'"
+          alt="Imagen del funko">
         <mat-card-title>{{ producto.model }}</mat-card-title>
         <mat-card-subtitle *ngIf="producto.brand">{{ producto.brand }}</mat-card-subtitle>
         <mat-card-content>

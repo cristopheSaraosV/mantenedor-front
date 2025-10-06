@@ -45,61 +45,47 @@
   </mat-card>
 
   <div class="products-grid" *ngIf="!loading && !error && products.length > 0">
-    <mat-card class="product-card" *ngFor="let product of products">
-      <mat-card-header>
-        <mat-card-title>{{ product.model }}</mat-card-title>
-        <mat-card-subtitle>
-          <div class="status-buttons">
-            <button mat-mini-fab 
-                    [color]="product.isActive ? 'primary' : 'warn'"
-                    class="status-button">
-              <mat-icon>{{ product.isActive ? 'check_circle' : 'cancel' }}</mat-icon>
-            </button>
-            <span class="status-text">{{ product.isActive ? 'Activo' : 'Inactivo' }}</span>
-            
-            <button mat-mini-fab 
-                    [color]="product.stock < 10 ? 'warn' : 'primary'"
-                    class="count-button">
-              <mat-icon>inventory_2</mat-icon>
-            </button>
-            <span class="count-text">Stock: {{ product.stock }}</span>
-          </div>
-        </mat-card-subtitle>
-      </mat-card-header>
-      
+    <mat-card class="producto-card" *ngFor="let product of products">
+      <img mat-card-image
+        [src]="product.imageUrl || 'https://i5.walmartimages.com/seo/Funko-POP-Football-Kylian-Mbapp-PSG_26b8cdaf-a999-4e78-904a-fe3930e8926c_1.95fa658cc18ab713bc292e2763d63ee6.png'"
+        alt="Imagen del producto">
+      <mat-card-title>{{ product.model }}</mat-card-title>
+      <mat-card-subtitle *ngIf="product.brand">{{ product.brand }}</mat-card-subtitle>
       <mat-card-content>
-        <div class="product-image" *ngIf="product.imageUrl">
-          <img [src]="product.imageUrl" alt="Imagen del producto" class="product-img">
-        </div>
-        
-        <p class="description" *ngIf="product.description">{{ product.description }}</p>
-        
-        <div class="product-details">
-          <div class="detail-row" *ngIf="product.price">
+        <p *ngIf="product.description">{{ product.description }}</p>
+        <div class="product-details" *ngIf="product.price || product.country">
+          <p *ngIf="product.price" class="price">
             <mat-icon>euro</mat-icon>
-            <span class="price">{{ formatPrice(product.price) }}</span>
-          </div>
-          <div class="detail-row" *ngIf="product.brand">
-            <mat-icon>business</mat-icon>
-            <span>{{ product.brand }}</span>
-          </div>
-          <div class="detail-row" *ngIf="product.country">
+            {{ formatPrice(product.price) }}
+          </p>
+          <p *ngIf="product.country" class="country">
             <mat-icon>public</mat-icon>
-            <span>{{ product.country }}</span>
-          </div>
-          <div class="detail-row" *ngIf="product.productType">
-            <mat-icon>label</mat-icon>
-            <span>{{ product.productType.name }}</span>
-          </div>
+            {{ product.country }}
+          </p>
+        </div>
+        <div class="product-type" *ngIf="product.productType">
+          <mat-icon>label</mat-icon>
+          <span>{{ product.productType.name }}</span>
+        </div>
+        <div class="stock-info">
+          <mat-icon>inventory_2</mat-icon>
+          <span>Stock: {{ product.stock }}</span>
+        </div>
+        <div class="status-info">
+          <mat-icon [color]="product.isActive ? 'primary' : 'warn'">
+            {{ product.isActive ? 'check_circle' : 'cancel' }}
+          </mat-icon>
+          <span [class.active]="product.isActive" [class.inactive]="!product.isActive">
+            {{ product.isActive ? 'Activo' : 'Inactivo' }}
+          </span>
         </div>
       </mat-card-content>
-      
-      <mat-card-actions *ngIf="isLoggedIn()" class="product-actions">
-        <button mat-button color="primary" [routerLink]="['/admin/products/edit', product.id]">
+      <mat-card-actions *ngIf="isLoggedIn()">
+        <button mat-raised-button color="primary" [routerLink]="['/admin/products/edit', product.id]">
           <mat-icon>edit</mat-icon>
           Editar
         </button>
-        <button mat-button color="warn" (click)="deleteProduct(product.id!)">
+        <button mat-stroked-button color="warn" (click)="deleteProduct(product.id!)">
           <mat-icon>delete</mat-icon>
           Eliminar
         </button>

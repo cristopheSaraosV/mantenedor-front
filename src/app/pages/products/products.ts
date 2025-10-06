@@ -1,6 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ProductService, Product } from '../../services/product.service';
 import { AuthService } from '../../auth.service';
 import { MaterialModules } from '../../material.module';
@@ -15,23 +15,41 @@ import { MaterialModules } from '../../material.module';
 export class ProductsComponent implements OnInit {
   private productService = inject(ProductService);
   private authService = inject(AuthService);
+  private router = inject(Router);
+
 
   products: Product[] = [];
   loading = true;
   error: string | null = null;
   showActiveOnly = true;
 
+
   ngOnInit() {
     this.loadProducts();
   }
-
   loadProducts() {
     this.loading = true;
     this.error = null;
 
-    const request = this.showActiveOnly 
-      ? this.productService.getActiveProducts()
-      : this.productService.getAllProducts();
+    // Obtener productTypeId de la URL
+    const productTypeId = this.router.url.split('/')[4];
+    const categoryId = this.router.parseUrl(this.router.url).queryParams['categoryId'];
+
+
+    let request;
+    
+    if (productTypeId) {
+      // Si hay productTypeId, obtener productos por tipo de producto
+      request = this.productService.getProductsByProductType(+productTypeId);
+    } else if (categoryId) {
+      // Si hay categoryId, obtener productos por categoría
+      request = this.productService.getProductsByCategory(+categoryId);
+    } else {
+      // Si no hay filtros, obtener todos los productos
+      request = this.showActiveOnly 
+        ? this.productService.getActiveProducts()
+        : this.productService.getAllProducts();
+    }
 
     request.subscribe({
       next: (products) => {
@@ -45,6 +63,7 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
+
 
   toggleActiveFilter() {
     this.showActiveOnly = !this.showActiveOnly;
