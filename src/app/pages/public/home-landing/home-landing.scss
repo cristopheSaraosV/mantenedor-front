@@ -1,172 +1,51 @@
-.toolbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.sidenav-container {
+  height: 100vh;
 }
 
-.logo {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: white;
+.sidenav {
+  width: 240px;
 }
 
-.spacer {
-  flex: 1 1 auto;
-}
-
-.hero {
-  background: #f5f5f5;
-  color: rgb(22, 22, 22);
-  padding: 4rem 2rem;
-  text-align: center;
-  min-height: 60vh;
+mat-nav-list a {
   display: flex;
   align-items: center;
-  justify-content: center;
-
-}
-
-.hero-text h2 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  font-weight: 300;
-}
-
-.hero-text img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0px 10px 10px rgba(42, 42, 109, 0.699);
-}
-
-.catalogo {
-  padding: 4rem 2rem;
-  background: #f8f9fa;
-  text-align: center;
-}
-
-.catalogo h3 {
-  font-size: 2rem;
-  margin-bottom: 3rem;
-  color: #333;
-  font-weight: 400;
-}
-
-.producto-card {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.producto-card:hover {
-  box-shadow: 0 10px 25px rgba(21, 24, 226, 0.493);
-}
-
-.producto-card img {
-  height: 200px;
-  object-fit: cover;
-}
-
-.producto-card mat-card-title {
-  font-size: 1.2rem;
+  gap: 8px;
   font-weight: 500;
-  color: #333;
 }
 
-.producto-card mat-card-content {
-  flex: 1;
-  padding: 1rem;
+
+/* === AJUSTE DE ALTURA UNIFORME EN LAS CARDS === */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch; /* Fuerza que todas las columnas tengan igual altura */
 }
 
-.producto-card mat-card-actions {
-  padding: 1rem;
-  gap: 0.5rem;
-}
-
-.product-details {
+.row > [class*="col-"] {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 1rem;
 }
 
-.product-details p {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-.price {
-  color: #4caf50;
-  font-weight: 600;
-}
-
-.country {
-  color: #666;
-}
-
-.product-type {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-  color: #2196f3;
-}
-
-/* Estados de carga, error y vacío */
-.loading-container,
-.error-container,
-.empty-container {
+.card {
+  flex: 1 1 auto; /* Se expande a ocupar todo el alto disponible */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 2rem;
-  text-align: center;
+  justify-content: space-between; /* Distribuye contenido equilibradamente */
+  height: 100%;
 }
 
-.loading-container mat-spinner {
-  margin-bottom: 1rem;
+.card img {
+  height: 250px;
+  object-fit: cover; /* Ajusta la imagen sin deformarla */
 }
 
-.loading-container p {
-  color: #666;
-  font-size: 1.1rem;
+.card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.error-container mat-icon {
-  font-size: 3rem;
-  width: 3rem;
-  height: 3rem;
-  margin-bottom: 1rem;
-}
-
-.error-container p {
-  color: #f44336;
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-}
-
-.empty-container mat-icon {
-  font-size: 4rem;
-  width: 4rem;
-  height: 4rem;
-  color: #ccc;
-  margin-bottom: 1rem;
-}
-
-.empty-container h3 {
-  color: #666;
-  margin-bottom: 0.5rem;
-}
-
-.empty-container p {
-  color: #999;
-}
 
 .footer {
   background: #333;
@@ -179,24 +58,4 @@
 .footer p {
   margin: 0;
   font-size: 0.9rem;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .hero-text h2 {
-    font-size: 1.8rem;
-  }
-  
-  .hero {
-    padding: 2rem 1rem;
-    min-height: 50vh;
-  }
-  
-  .catalogo {
-    padding: 2rem 1rem;
-  }
-  
-  .catalogo h3 {
-    font-size: 1.5rem;
-  }
 }

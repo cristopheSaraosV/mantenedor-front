@@ -1,29 +1,68 @@
-<!-- Toolbar del Sistema de Gestión - Solo visible en rutas del admin autenticadas -->
-<mat-toolbar color="primary" class="app-toolbar" *ngIf="isAdminRoute()">
-  <span class="app-title">Sistema de Gestión</span>
-  <span class="spacer"></span>
-  <button mat-button (click)="navigateTo('/admin/home')">
-    <mat-icon>home</mat-icon>
-    Inicio
-  </button>
-  <button mat-button (click)="navigateTo('/admin/categories')">
-    <mat-icon>category</mat-icon>
-    Categorías
-  </button>
-  <button mat-button (click)="navigateTo('/admin/product-types')">
-    <mat-icon>label</mat-icon>
-    Tipos de Producto
-  </button>
-  <button mat-button (click)="navigateTo('/admin/products')">
-    <mat-icon>inventory</mat-icon>
-    Productos
-  </button>
-  <button mat-button color="warn" (click)="logout()">
-    <mat-icon>logout</mat-icon>
-    Cerrar Sesión
-  </button>
-</mat-toolbar>
+<mat-sidenav-container class="app-container" *ngIf="isAdminRoute(); else publicContent">
+  <!-- SIDENAV -->
+  <mat-sidenav #drawer mode="over" class="app-sidenav" fixedInViewport>
+    <mat-toolbar color="primary" class="sidenav-header">
+      <span>Gestión</span>
+    </mat-toolbar>
 
-<main class="main-content" [class.with-toolbar]="isAdminRoute()">
+    <mat-nav-list>
+      <a mat-list-item (click)="navigateTo('/admin/home'); drawer.close()">
+        <div class="d-flex gap-2 align-items-center">
+          <mat-icon>home</mat-icon>
+          <span>Inicio</span>
+        </div>
+      </a>
+      <a mat-list-item (click)="navigateTo('/admin/categories'); drawer.close()">
+        <div class="d-flex gap-2 align-items-center">
+          <mat-icon>category</mat-icon>
+          <span>Categorías</span>
+        </div>
+
+      </a>
+      <a mat-list-item (click)="navigateTo('/admin/product-types'); drawer.close()">
+        <div class="d-flex gap-2 align-items-center">
+          <mat-icon>label</mat-icon>
+          <span>Tipos de Producto</span>
+        </div>
+      </a>
+      <a mat-list-item (click)="navigateTo('/admin/products'); drawer.close()">
+        <div class="d-flex gap-2 align-items-center">
+          <mat-icon>inventory</mat-icon>
+          <span>Productos</span>
+        </div>
+      </a>
+
+      <mat-divider></mat-divider>
+
+      <a mat-list-item color="warn" (click)="logout(); drawer.close()">
+        <div class="d-flex gap-2 align-items-center">
+          <mat-icon color="warn">logout</mat-icon>
+          <span class="text-danger">Cerrar Sesión</span>
+        </div>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="app-toolbar">
+      <button mat-icon-button (click)="drawer.toggle()" aria-label="Toggle sidenav">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="app-title">Sistema de Gestión</span>
+      <span class="spacer"></span>
+      <button mat-icon-button color="warn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- Contenido público (fuera del admin) -->
+<ng-template #publicContent>
   <router-outlet></router-outlet>
-</main>
+</ng-template>

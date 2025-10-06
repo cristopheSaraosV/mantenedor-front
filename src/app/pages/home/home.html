@@ -1,50 +1,57 @@
-<div class="home-container">
-  <mat-card class="welcome-card">
-    <mat-card-header>
-      <mat-card-title>
-        <mat-icon>home</mat-icon>
-        Bienvenido al Sistema de Gestión
-      </mat-card-title>
-    </mat-card-header>
-    
-    <mat-card-content>
-      <p class="welcome-text">
-        <mat-icon>check_circle</mat-icon>
+<div class="container py-5 home-container">
+  <!-- Tarjeta de bienvenida -->
+  <div class="card shadow-lg border-0 mb-5">
+    <div class="card-header bg-primary text-white d-flex align-items-center">
+      <mat-icon class="me-2">home</mat-icon>
+      <h4 class="mb-0">Bienvenido al Sistema de Gestión</h4>
+    </div>
+
+    <div class="card-body">
+      <p class="welcome-text text-success fw-semibold d-flex align-items-center mb-4">
+        <mat-icon class="me-2 text-success">check_circle</mat-icon>
         Has iniciado sesión correctamente con tu token de autenticación.
       </p>
-      
-      <div class="features-grid">
-        <mat-card class="feature-card">
-          <mat-card-content>
-            <mat-icon>category</mat-icon>
-            <h3>Gestionar Categorías</h3>
-            <p>Administra las categorías de productos</p>
-          </mat-card-content>
-        </mat-card>
-        
-        <mat-card class="feature-card">
-          <mat-card-content>
-            <mat-icon>label</mat-icon>
-            <h3>Tipos de Producto</h3>
-            <p>Configura los tipos de productos disponibles</p>
-          </mat-card-content>
-        </mat-card>
-        
-        <mat-card class="feature-card">
-          <mat-card-content>
-            <mat-icon>inventory</mat-icon>
-            <h3>Inventario</h3>
-            <p>Gestiona el inventario de productos</p>
-          </mat-card-content>
-        </mat-card>
+
+      <!-- Grid de funcionalidades -->
+      <div class="row g-4 text-center features-grid">
+        <div class="col-12 col-md-4">
+          <div class="card h-100 shadow-sm border-0 feature-card p-3">
+            <div class="card-body d-flex flex-column align-items-center justify-content-center">
+              <mat-icon class="fs-1 text-primary mb-2">category</mat-icon>
+              <h5 class="fw-bold mb-1">Gestionar Categorías</h5>
+              <p class="text-muted mb-0">Administra las categorías de productos</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card h-100 shadow-sm border-0 feature-card p-3">
+            <div class="card-body d-flex flex-column align-items-center justify-content-center">
+              <mat-icon class="fs-1 text-primary mb-2">label</mat-icon>
+              <h5 class="fw-bold mb-1">Tipos de Producto</h5>
+              <p class="text-muted mb-0">Configura los tipos de productos disponibles</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card h-100 shadow-sm border-0 feature-card p-3">
+            <div class="card-body d-flex flex-column align-items-center justify-content-center">
+              <mat-icon class="fs-1 text-primary mb-2">inventory</mat-icon>
+              <h5 class="fw-bold mb-1">Inventario</h5>
+              <p class="text-muted mb-0">Gestiona el inventario de productos</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </mat-card-content>
-    
-    <mat-card-actions>
-      <button mat-raised-button color="warn" (click)="logout()">
+    </div>
+
+    <!-- Botón inferior -->
+    <div class="card-footer text-end bg-light border-0">
+      <button mat-raised-button color="warn" (click)="logout()" class="btn btn-danger d-inline-flex align-items-center gap-1">
         <mat-icon>logout</mat-icon>
         Cerrar Sesión
       </button>
-    </mat-card-actions>
-  </mat-card>
+    </div>
+  </div>
 </div>
