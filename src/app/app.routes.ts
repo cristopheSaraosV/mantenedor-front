@@ -1,41 +1,17 @@
 import { HomeLanding } from './pages/public/home-landing/home-landing';
 import { Routes } from '@angular/router';
 import { authGuard } from './auth.guard';
-import { Home } from './pages/home/home';
-import { Login } from './pages/login/login';
-import { ProductsComponent } from './pages/products/products';
-import { ProductFormComponent } from './pages/product-form/product-form';
-import { CategoriesComponent } from './pages/categories/categories';
-import { CategoryFormComponent } from './pages/category-form/category-form';
-import { ProductTypesComponent } from './pages/product-types/product-types';
-import { ProductTypeFormComponent } from './pages/product-type-form/product-type-form';
 
 export const routes: Routes = [
   // HomeLanding - Sistema público separado
   { path: '', component: HomeLanding },
   
-  // Sistema de Gestión - Rutas protegidas
-  { path: 'admin', children: [
-    { path: 'login', component: Login },
-    { path: 'home', component: Home, canActivate: [authGuard] },
-    
-    // Products
-    { path: 'products', component: ProductsComponent, canActivate: [authGuard] },
-    { path: 'products/new', component: ProductFormComponent, canActivate: [authGuard] },
-    { path: 'products/edit/:id', component: ProductFormComponent, canActivate: [authGuard] },
-    { path: 'products/product-type/:productTypeId', component: ProductsComponent, canActivate: [authGuard] },
-    
-    // Categories
-    { path: 'categories', component: CategoriesComponent, canActivate: [authGuard] },
-    { path: 'categories/new', component: CategoryFormComponent, canActivate: [authGuard] },
-    { path: 'categories/edit/:id', component: CategoryFormComponent, canActivate: [authGuard] },
-    
-    // Product Types
-    { path: 'product-types', component: ProductTypesComponent, canActivate: [authGuard] },
-    { path: 'product-types/new', component: ProductTypeFormComponent, canActivate: [authGuard] },
-    { path: 'product-types/edit/:id', component: ProductTypeFormComponent, canActivate: [authGuard] },
-    { path: 'product-types/category/:categoryId', component: ProductTypesComponent, canActivate: [authGuard] },
-  ]},
+  // Sistema de Gestión - Rutas protegidas con lazy loading
+  { 
+    path: 'admin', 
+    loadChildren: () => import('./admin/admin.routes').then(m => m.adminRoutes),
+    canActivate: [authGuard]
+  },
   
   // Redirecciones para compatibilidad
   { path: 'login', redirectTo: '/admin/login', pathMatch: 'full' },

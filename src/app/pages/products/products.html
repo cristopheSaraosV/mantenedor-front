@@ -42,12 +42,16 @@
 
   <!-- GRID DE PRODUCTOS -->
   <div class="row g-4" *ngIf="!loading && !error && products.length > 0">
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let product of products">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let product of products; let i = index">
       <div class="card h-100 shadow-sm border-0">
         <img
           [src]="product.imageUrl || 'https://i5.walmartimages.com/seo/Funko-POP-Football-Kylian-Mbapp-PSG_26b8cdaf-a999-4e78-904a-fe3930e8926c_1.95fa658cc18ab713bc292e2763d63ee6.png'"
           alt="Imagen del producto"
           class="card-img-top"
+          width="300"
+          height="250"
+          loading="eager"
+          [attr.fetchpriority]="i === 0 ? 'high' : 'auto'"
         />
 
         <div class="card-body d-flex flex-column justify-content-between">

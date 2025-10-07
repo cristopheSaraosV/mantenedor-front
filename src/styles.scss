@@ -2,9 +2,22 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 @import './override-material.css';
 
-/* Material Icons */
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+/* Material Icons - Optimized with font-display */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+/* Critical CSS for above-the-fold content */
+.critical-css {
+  /* Hide non-critical content initially */
+  .lazy-load {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .lazy-load.loaded {
+    opacity: 1;
+  }
+}
 
 /* ========================================
    🎨 SISTEMA DE VARIABLES DE COLORES
